@@ -1,5 +1,9 @@
 # Dependencies
 node_modules/
+.venv/
+venv/
+__pycache__/
+*.py[cod]
 
 # Build outputs
 dist/
@@ -22,3 +26,10 @@ pnpm-debug.log*
 .idea/
 .DS_Store
 Thumbs.db
+
+# Local tooling / agent state
+.claude/
+.codegraph/
+.comet/
+.mcp.json
+skills-lock.json
