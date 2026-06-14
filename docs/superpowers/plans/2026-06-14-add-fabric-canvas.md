@@ -275,7 +275,7 @@ git commit -m "chore(frontend): add tailwind styling support"
 **Files:**
 - Create: `frontend/src/components/DrawingCanvas.vue`
 
-- [ ] **Step 1: 创建组件完整实现**
+- [x] **Step 1: 创建组件完整实现**
 
 Create `frontend/src/components/DrawingCanvas.vue`:
 
@@ -378,7 +378,7 @@ defineExpose({ canvas })
 </template>
 ```
 
-- [ ] **Step 2: 对照设计要求检查组件行为**
+- [x] **Step 2: 对照设计要求检查组件行为**
 
 确认组件满足：
 
@@ -396,7 +396,7 @@ defineExpose({ canvas })
 - 下载文件名为 voicecanvas-drawing.png
 ```
 
-- [ ] **Step 3: 运行组件相关构建验证**
+- [x] **Step 3: 运行组件相关构建验证**
 
 Run:
 
@@ -407,7 +407,7 @@ npm run build
 
 Expected: build 成功；如果 Fabric 类型或 `toDataURL` 选项报错，优先保持 Fabric v5 导入方式，并只调整 TypeScript 类型写法，不改变组件职责。
 
-- [ ] **Step 4: 提交画布组件**
+- [x] **Step 4: 提交画布组件**
 
 ```bash
 git add frontend/src/components/DrawingCanvas.vue

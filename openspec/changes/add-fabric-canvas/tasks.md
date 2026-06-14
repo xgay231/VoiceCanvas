@@ -6,12 +6,12 @@
 
 ## 2. Drawing Canvas Component
 
-- [ ] 2.1 Create `frontend/src/components/DrawingCanvas.vue` with a visible 800x600 canvas area and Tailwind-styled border/background.
-- [ ] 2.2 Initialize `fabric.Canvas` in `onMounted` after the canvas element is available.
-- [ ] 2.3 Add a centered default shape after Fabric initialization to prove interaction works.
-- [ ] 2.4 Dispose the Fabric canvas in `onUnmounted` and clear the stored instance reference.
-- [ ] 2.5 Expose the Fabric canvas instance with `defineExpose` for parent-component access.
-- [ ] 2.6 Add a top-right download button that exports the current Fabric canvas content as an image.
+- [x] 2.1 Create `frontend/src/components/DrawingCanvas.vue` with a visible 800x600 canvas area and Tailwind-styled border/background.
+- [x] 2.2 Initialize `fabric.Canvas` in `onMounted` after the canvas element is available.
+- [x] 2.3 Add a centered default shape after Fabric initialization to prove interaction works.
+- [x] 2.4 Dispose the Fabric canvas in `onUnmounted` and clear the stored instance reference.
+- [x] 2.5 Expose the Fabric canvas instance with `defineExpose` for parent-component access.
+- [x] 2.6 Add a top-right download button that exports the current Fabric canvas content as an image.
 
 ## 3. App Integration and Verification
 
