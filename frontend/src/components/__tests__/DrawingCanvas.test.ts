@@ -14,19 +14,23 @@ const mockCanvas = {
   dispose: mockDispose,
 }
 
-vi.mock('fabric', () => ({
-  fabric: {
-    Canvas: class MockCanvas {
-      add = mockAdd
-      setActiveObject = mockSetActiveObject
-      renderAll = mockRenderAll
-      dispose = mockDispose
+vi.mock('fabric', () => {
+  const mockWrapper = document.createElement('div')
+  return {
+    fabric: {
+      Canvas: class MockCanvas {
+        add = mockAdd
+        setActiveObject = mockSetActiveObject
+        renderAll = mockRenderAll
+        dispose = mockDispose
+        wrapperEl = mockWrapper
+      },
+      Rect: class MockRect {
+        constructor(public opts: unknown) {}
+      },
     },
-    Rect: class MockRect {
-      constructor(public opts: unknown) {}
-    },
-  },
-}))
+  }
+})
 
 import DrawingCanvas from '../DrawingCanvas.vue'
 

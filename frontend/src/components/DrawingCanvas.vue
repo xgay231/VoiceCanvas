@@ -59,6 +59,11 @@ onMounted(() => {
   canvas.value = fabricCanvas
   addDefaultShape(fabricCanvas)
   fabricCanvas.renderAll()
+
+  // Fabric.js replaces the original <canvas> with its own wrapper div.
+  // Apply border/background styles to the Fabric wrapper so they're visible.
+  const wrapper = fabricCanvas.wrapperEl
+  wrapper.classList.add('block', 'border', 'border-slate-400', 'bg-slate-50', 'shadow-md')
 })
 
 onUnmounted(() => {
@@ -87,7 +92,6 @@ defineExpose({ canvas })
 
       <canvas
         ref="canvasElement"
-        class="block border border-slate-400 bg-slate-50 shadow-md"
         :width="CANVAS_WIDTH"
         :height="CANVAS_HEIGHT"
       />
