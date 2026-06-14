@@ -902,7 +902,7 @@ git add frontend/src/App.vue frontend/src/App.test.js
 git commit -m "feat(frontend): wire voice drawing results to canvas"
 ```
 
-- [ ] **Step 6: Mark OpenSpec wiring task complete**
+- [x] **Step 6: Mark OpenSpec wiring task complete**
 
 Change this checkbox in `openspec/changes/execute-drawing-instructions/tasks.md`:
 
