@@ -5,30 +5,16 @@ TBD - created by archiving change semantic-drawing-json. Update Purpose after ar
 ## Requirements
 ### Requirement: Structured Drawing Interpretation
 
-The backend SHALL convert recognized natural-language drawing instructions into a structured JSON object that represents the drawing semantic result.
+The backend SHALL convert recognized or submitted natural-language drawing instructions into a structured JSON object that represents the drawing semantic result and can be consumed by the frontend drawing executor.
 
-#### Scenario: Create a basic shape
+#### Scenario: Interpret text through a standalone endpoint for frontend execution
 
-- **GIVEN** the ASR transcript is `画一个蓝色圆形在画布中央`
-- **WHEN** the backend performs semantic drawing interpretation
-- **THEN** the response SHALL include the original transcript text
-- **AND** the response SHALL include a `drawing` object with `version`, `type`, and `actions`
-- **AND** `drawing.type` SHALL be `draw`
-- **AND** at least one action SHALL represent creating a circle with blue styling and center placement semantics
-- **AND** placement and size SHALL be represented with semantic presets when exact canvas coordinates are not provided
-
-#### Scenario: Interpret text through a standalone endpoint
-
-- **GIVEN** a client submits recognized or typed text to the standalone drawing interpretation endpoint
-- **WHEN** the backend performs semantic drawing interpretation
-- **THEN** the endpoint SHALL return the same `drawing` contract used by `/api/asr`
+- **GIVEN** the frontend has a recognized transcript such as `画一个蓝色圆形在画布中央`
+- **WHEN** the frontend submits that transcript to the standalone drawing interpretation endpoint
+- **THEN** the endpoint SHALL return a `drawing` object with `version`, `type`, `actions`, `requires_clarification`, and `message`
+- **AND** `drawing.type` SHALL be `draw` when executable create actions are available
+- **AND** the response SHALL preserve enough structured action data for the frontend to create supported Fabric.js objects without parsing natural-language text
 - **AND** the endpoint SHALL not require an audio upload
-
-#### Scenario: Preserve original transcript
-
-- **GIVEN** a voice request is successfully transcribed
-- **WHEN** semantic drawing interpretation succeeds or fails
-- **THEN** the response SHALL preserve the original transcript in the `text` field
 
 ### Requirement: Stable JSON Model Output Contract
 
@@ -49,50 +35,14 @@ The backend SHALL prompt `mimo-v2.5-pro` to return only a JSON object matching t
 
 ### Requirement: Safe Handling of Ambiguous or Unsupported Input
 
-The semantic drawing result SHALL explicitly represent ambiguous, irrelevant, or unsupported user input instead of inventing executable drawing actions.
+The semantic drawing result SHALL explicitly represent ambiguous, irrelevant, unsupported, or parser-error input with a user-facing message instead of inventing executable drawing actions.
 
-#### Scenario: Ambiguous edit without target context
+#### Scenario: Non-draw result includes displayable message
 
-- **GIVEN** the ASR transcript is `把它改成红色并放大一点`
-- **AND** no target object context is available to the semantic parser
-- **WHEN** the backend performs semantic drawing interpretation
-- **THEN** `drawing.type` SHALL be `clarification`
-- **AND** the result SHALL include a human-readable `message` describing what information is needed
-- **AND** the result SHALL NOT include a fabricated target object id
-
-#### Scenario: Non-drawing input
-
-- **GIVEN** the ASR transcript is unrelated to drawing or canvas operations
-- **WHEN** the backend performs semantic drawing interpretation
-- **THEN** `drawing.type` SHALL be `no_op`
-- **AND** the response SHALL NOT include executable drawing actions
-
-#### Scenario: Drawing request outside supported schema
-
-- **GIVEN** the ASR transcript requests a drawing operation outside the supported schema
-- **WHEN** the backend performs semantic drawing interpretation
-- **THEN** `drawing.type` SHALL be `unsupported`
-- **AND** the result SHALL include a message describing the limitation
-
-#### Scenario: Unsupported destructive or canvas-wide operation
-
-- **GIVEN** the ASR transcript requests delete, clear, group, layer, or stacking operations
-- **WHEN** the backend performs semantic drawing interpretation in the first version
-- **THEN** `drawing.type` SHALL be `unsupported`
-- **AND** the response SHALL NOT include executable drawing actions
-
-#### Scenario: Supported first-version action scope
-
-- **GIVEN** the ASR transcript describes creating a rectangle, circle, text, or line
-- **WHEN** the backend performs semantic drawing interpretation
-- **THEN** `drawing.type` MAY be `draw`
-- **AND** the action SHALL use `create`
-
-- **GIVEN** the ASR transcript describes a basic update such as color, size, or position change
-- **AND** sufficient target context is available
-- **WHEN** the backend performs semantic drawing interpretation
-- **THEN** `drawing.type` MAY be `draw`
-- **AND** the action SHALL use `update`
+- **GIVEN** the semantic drawing result has type `clarification`, `no_op`, `unsupported`, `parse_error`, or `semantic_error`
+- **WHEN** the backend returns the drawing envelope to the frontend
+- **THEN** the drawing envelope SHALL include a human-readable `message` suitable for display in the voice UI
+- **AND** the drawing envelope SHALL NOT require the frontend to infer a message from raw model text
 
 ### Requirement: Server-side Parse and Validation Failure Path
 

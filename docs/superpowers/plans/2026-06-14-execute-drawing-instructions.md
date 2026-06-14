@@ -2,6 +2,7 @@
 change: execute-drawing-instructions
 design-doc: docs/superpowers/specs/2026-06-14-execute-drawing-instructions-design.md
 base-ref: f5c292af1fd910ec1ce1d26c43f8834c686dbf3b
+archived-with: 2026-06-14-execute-drawing-instructions
 ---
 
 # Execute Drawing Instructions Implementation Plan
@@ -14,6 +15,7 @@ base-ref: f5c292af1fd910ec1ce1d26c43f8834c686dbf3b
 
 **Tech Stack:** Vue 3 `<script setup>`、Fabric.js 5、Vitest + Vue Test Utils、FastAPI + pytest。
 
+archived-with: 2026-06-14-execute-drawing-instructions
 ---
 
 ## File Structure

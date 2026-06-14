@@ -2,6 +2,8 @@
 comet_change: execute-drawing-instructions
 role: technical-design
 canonical_spec: openspec
+archived-with: 2026-06-14-execute-drawing-instructions
+status: final
 ---
 
 # Execute Drawing Instructions Technical Design
