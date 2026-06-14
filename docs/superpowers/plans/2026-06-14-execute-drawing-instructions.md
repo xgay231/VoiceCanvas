@@ -772,7 +772,7 @@ git add frontend/src/components/VoiceControl.vue frontend/src/components/__tests
 git commit -m "feat(frontend): interpret recognized text for drawing"
 ```
 
-- [ ] **Step 6: Mark OpenSpec frontend API task complete**
+- [x] **Step 6: Mark OpenSpec frontend API task complete**
 
 Change this checkbox in `openspec/changes/execute-drawing-instructions/tasks.md`:
 
