@@ -1,4 +1,4 @@
-<script setup>
+<script setup lang="ts">
 import VoiceControl from './components/VoiceControl.vue'
 import DrawingCanvas from './components/DrawingCanvas.vue'
 </script>

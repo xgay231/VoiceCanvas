@@ -421,7 +421,7 @@ git commit -m "feat(frontend): add fabric drawing canvas component"
 **Files:**
 - Modify: `frontend/src/App.vue`
 
-- [ ] **Step 1: 修改 `App.vue` 导入与模板**
+- [x] **Step 1: 修改 `App.vue` 导入与模板**
 
 Replace `frontend/src/App.vue` with:
 
@@ -439,7 +439,7 @@ import DrawingCanvas from './components/DrawingCanvas.vue'
 </template>
 ```
 
-- [ ] **Step 2: 确认未破坏语音 UI**
+- [x] **Step 2: 确认未破坏语音 UI**
 
 检查 `VoiceControl` 仍然被导入并在模板中渲染：
 
@@ -450,7 +450,7 @@ import DrawingCanvas from './components/DrawingCanvas.vue'
 
 不要修改 `frontend/src/components/VoiceControl.vue`、`frontend/src/composables/useVoiceCapture.js`、`frontend/src/utils/wav-encoder.js` 或任何后端文件。
 
-- [ ] **Step 3: 运行集成构建验证**
+- [x] **Step 3: 运行集成构建验证**
 
 Run:
 
@@ -461,7 +461,7 @@ npm run build
 
 Expected: build 成功，`App.vue` 能解析 `DrawingCanvas.vue`。
 
-- [ ] **Step 4: 提交 App 集成**
+- [x] **Step 4: 提交 App 集成**
 
 ```bash
 git add frontend/src/App.vue
