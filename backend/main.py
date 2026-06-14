@@ -5,6 +5,9 @@ from dotenv import load_dotenv
 from fastapi import FastAPI, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from openai import OpenAI
+from pydantic import BaseModel
+
+from drawing_interpreter import interpret_drawing_text, semantic_error_payload
 
 load_dotenv()
 
@@ -65,3 +68,17 @@ async def transcribe(audio: UploadFile):
         return {"text": completion.choices[0].message.content, "success": True}
     except Exception as e:
         return {"text": "", "success": False, "error": str(e)}
+
+
+class InterpretDrawingRequest(BaseModel):
+    text: str
+
+
+@app.post("/api/interpret-drawing")
+async def interpret_drawing(req: InterpretDrawingRequest):
+    try:
+        drawing = interpret_drawing_text(req.text, client)
+        return {"success": True, "drawing": drawing}
+    except Exception as exc:
+        print(f"[interpret-drawing] unexpected error: {exc}")
+        return {"success": True, "drawing": semantic_error_payload()}
