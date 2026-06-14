@@ -2,6 +2,8 @@
 comet_change: semantic-drawing-json
 role: technical-design
 canonical_spec: openspec
+archived-with: 2026-06-14-semantic-drawing-json
+status: final
 ---
 
 # Semantic Drawing JSON Technical Design

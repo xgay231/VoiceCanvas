@@ -2,6 +2,7 @@
 change: semantic-drawing-json
 design-doc: docs/superpowers/specs/2026-06-14-semantic-drawing-json-design.md
 base-ref: cf841d6510ce172a6a76704ff66fa1d9dd12e926
+archived-with: 2026-06-14-semantic-drawing-json
 ---
 
 # Semantic Drawing JSON Implementation Plan
@@ -14,6 +15,7 @@ base-ref: cf841d6510ce172a6a76704ff66fa1d9dd12e926
 
 **Tech Stack:** Python 3、FastAPI、OpenAI-compatible MIMO client、pytest、FastAPI TestClient、OpenSpec Markdown specs。
 
+archived-with: 2026-06-14-semantic-drawing-json
 ---
 
 ## Scope Check
@@ -57,6 +59,7 @@ base-ref: cf841d6510ce172a6a76704ff66fa1d9dd12e926
 - `update`：仅支持有足够目标上下文时的基础颜色、尺寸、位置变更。
 - `delete`、`clear`、`group`、`layer`、stacking：必须返回 `unsupported`，不得返回可执行 actions。
 
+archived-with: 2026-06-14-semantic-drawing-json
 ---
 
 ### Task 1: OpenSpec Contract Patch
@@ -124,6 +127,7 @@ git add openspec/changes/semantic-drawing-json/specs/semantic-drawing-json/spec.
 git commit -m "spec: define semantic drawing json contract"
 ```
 
+archived-with: 2026-06-14-semantic-drawing-json
 ---
 
 ### Task 2: Interpreter Parse Tests
@@ -194,6 +198,7 @@ git add backend/tests/test_drawing_interpreter.py
 git commit -m "test: cover drawing interpreter json parsing"
 ```
 
+archived-with: 2026-06-14-semantic-drawing-json
 ---
 
 ### Task 3: Interpreter Parse Implementation
@@ -253,6 +258,7 @@ git add backend/drawing_interpreter.py backend/tests/test_drawing_interpreter.py
 git commit -m "feat: parse drawing interpreter json output"
 ```
 
+archived-with: 2026-06-14-semantic-drawing-json
 ---
 
 ### Task 4: Interpreter Validation Tests
@@ -368,6 +374,7 @@ git add backend/tests/test_drawing_interpreter.py
 git commit -m "test: cover drawing payload validation"
 ```
 
+archived-with: 2026-06-14-semantic-drawing-json
 ---
 
 ### Task 5: Interpreter Validation Implementation
@@ -469,6 +476,7 @@ git add backend/drawing_interpreter.py backend/tests/test_drawing_interpreter.py
 git commit -m "feat: validate drawing interpreter payloads"
 ```
 
+archived-with: 2026-06-14-semantic-drawing-json
 ---
 
 ### Task 6: Interpreter Model Call Tests
@@ -562,6 +570,7 @@ git add backend/tests/test_drawing_interpreter.py
 git commit -m "test: cover drawing semantic model calls"
 ```
 
+archived-with: 2026-06-14-semantic-drawing-json
 ---
 
 ### Task 7: Interpreter Model Call Implementation
@@ -665,6 +674,7 @@ git add backend/drawing_interpreter.py backend/tests/test_drawing_interpreter.py
 git commit -m "feat: call mimo pro for drawing interpretation"
 ```
 
+archived-with: 2026-06-14-semantic-drawing-json
 ---
 
 ### Task 8: Standalone Endpoint Tests
@@ -788,6 +798,7 @@ git add backend/tests/test_interpret_drawing_endpoint.py
 git commit -m "test: cover drawing interpretation endpoint"
 ```
 
+archived-with: 2026-06-14-semantic-drawing-json
 ---
 
 ### Task 9: Standalone Endpoint Implementation
@@ -843,6 +854,7 @@ git add backend/main.py backend/tests/test_interpret_drawing_endpoint.py
 git commit -m "feat: add drawing interpretation endpoint"
 ```
 
+archived-with: 2026-06-14-semantic-drawing-json
 ---
 
 ### Task 10: ASR Integration Tests
@@ -979,6 +991,7 @@ git add backend/tests/test_asr.py
 git commit -m "test: cover asr drawing response contract"
 ```
 
+archived-with: 2026-06-14-semantic-drawing-json
 ---
 
 ### Task 11: ASR Integration Implementation
@@ -1039,6 +1052,7 @@ git add backend/main.py backend/tests/test_asr.py backend/tests/test_interpret_d
 git commit -m "feat: include drawing interpretation in asr response"
 ```
 
+archived-with: 2026-06-14-semantic-drawing-json
 ---
 
 ### Task 12: Full Backend Verification
@@ -1085,6 +1099,7 @@ git commit -m "fix: stabilize semantic drawing backend tests"
 
 If no files changed, do not create an empty commit.
 
+archived-with: 2026-06-14-semantic-drawing-json
 ---
 
 ### Task 13: Frontend Compatibility Verification
@@ -1125,6 +1140,7 @@ git commit -m "chore: refresh frontend lockfile"
 
 If no frontend files changed, do not create a commit.
 
+archived-with: 2026-06-14-semantic-drawing-json
 ---
 
 ### Task 14: OpenSpec and Change-State Verification
@@ -1177,6 +1193,7 @@ git add openspec/changes/semantic-drawing-json/tasks.md
 git commit -m "chore: mark semantic drawing json tasks complete"
 ```
 
+archived-with: 2026-06-14-semantic-drawing-json
 ---
 
 ## Final Verification Checklist

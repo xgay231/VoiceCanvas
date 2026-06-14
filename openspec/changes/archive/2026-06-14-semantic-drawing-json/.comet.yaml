@@ -1,22 +1,22 @@
 workflow: full
-phase: build
+phase: archive
 context_compression: off
 build_mode: executing-plans
 build_pause: null
 subagent_dispatch: null
 tdd_mode: tdd
 isolation: branch
-verify_mode: null
+verify_mode: full
 auto_transition: true
 base_ref: cf841d6510ce172a6a76704ff66fa1d9dd12e926
 design_doc: docs/superpowers/specs/2026-06-14-semantic-drawing-json-design.md
 plan: docs/superpowers/plans/2026-06-14-semantic-drawing-json.md
-verify_result: pending
-verification_report: null
-branch_status: pending
+verify_result: pass
+verification_report: docs/verification/2026-06-14-semantic-drawing-json.md
+branch_status: handled
 created_at: 2026-06-14
-verified_at: null
-archived: false
+verified_at: 2026-06-14
+archived: true
 handoff_context: openspec/changes/semantic-drawing-json/.comet/handoff/design-context.json
 handoff_hash: 601d7646031b274372c8502f17ee1f6483dd2ae55bcd8ce71e708c655e5612d4
-build_command: python -m pytest tests/ -v
+build_command: npm run build --prefix frontend
