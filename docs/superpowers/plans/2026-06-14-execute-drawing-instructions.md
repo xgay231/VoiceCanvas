@@ -928,7 +928,7 @@ git commit -m "chore(openspec): mark voice to canvas wiring complete"
 **Files:**
 - Modify: `openspec/changes/execute-drawing-instructions/tasks.md:1-8`
 
-- [ ] **Step 1: Run all focused backend and frontend tests**
+- [x] **Step 1: Run all focused backend and frontend tests**
 
 Run from `backend/`:
 
@@ -946,7 +946,7 @@ npm run test -- src/api/__tests__/drawingInterpreter.test.js src/components/__te
 
 Expected: PASS.
 
-- [ ] **Step 2: Mark focused coverage task complete**
+- [x] **Step 2: Mark focused coverage task complete**
 
 Change this checkbox in `openspec/changes/execute-drawing-instructions/tasks.md`:
 
@@ -960,7 +960,7 @@ to:
 - [x] Add focused tests or verification coverage for successful basic creation, non-draw message handling, and unsupported actions not crashing the UI.
 ```
 
-- [ ] **Step 3: Commit focused coverage status**
+- [x] **Step 3: Commit focused coverage status**
 
 ```bash
 git add openspec/changes/execute-drawing-instructions/tasks.md
