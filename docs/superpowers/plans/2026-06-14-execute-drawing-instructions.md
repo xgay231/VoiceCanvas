@@ -1041,7 +1041,7 @@ git commit -m "chore(openspec): mark drawing execution verification complete"
 
 ## Final Build Gate
 
-- [ ] **Step 1: Confirm all OpenSpec tasks are checked**
+- [x] **Step 1: Confirm all OpenSpec tasks are checked**
 
 Run:
 
@@ -1051,7 +1051,7 @@ grep -n '\- \[ \]' openspec/changes/execute-drawing-instructions/tasks.md
 
 Expected: no output.
 
-- [ ] **Step 2: Request code review if using executing-plans**
+- [x] **Step 2: Request code review if using executing-plans**
 
 If `build_mode` is `executing-plans`, load `requesting-code-review` before running the build guard. Fix CRITICAL findings before continuing. If the skill is unavailable, append this exact marker to `openspec/changes/execute-drawing-instructions/tasks.md` and commit it:
 

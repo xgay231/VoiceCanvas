@@ -1,7 +1,7 @@
 // @vitest-environment jsdom
-import { describe, expect, it, vi, beforeEach } from 'vitest'
-import { mount, flushPromises } from '@vue/test-utils'
-import { ref } from 'vue'
+import { describe, expect, it, vi, beforeEach, afterEach } from 'vitest'
+import { mount, flushPromises, enableAutoUnmount } from '@vue/test-utils'
+import { ref, nextTick } from 'vue'
 
 const mockResults = ref([])
 const mockStatus = ref('idle')
@@ -25,6 +25,8 @@ vi.mock('../../api/drawingInterpreter.js', () => ({
 }))
 
 import VoiceControl from '../VoiceControl.vue'
+
+enableAutoUnmount(afterEach)
 
 describe('VoiceControl drawing interpretation', () => {
   beforeEach(() => {
@@ -84,5 +86,53 @@ describe('VoiceControl drawing interpretation', () => {
 
     expect(wrapper.text()).toContain('暂不支持旋转操作')
     expect(wrapper.emitted('drawing')).toBeUndefined()
+  })
+
+  it('ignores stale interpretation responses for older transcripts', async () => {
+    let resolveFirst
+    let resolveSecond
+    mockInterpretDrawingText
+      .mockReturnValueOnce(new Promise((resolve) => { resolveFirst = resolve }))
+      .mockReturnValueOnce(new Promise((resolve) => { resolveSecond = resolve }))
+    const wrapper = mount(VoiceControl)
+
+    mockResults.value = [{ text: '画一个圆', timestamp: 1 }]
+    await nextTick()
+    await nextTick()
+    expect(mockInterpretDrawingText).toHaveBeenCalledTimes(1)
+    mockResults.value = [
+      { text: '画一个圆', timestamp: 1 },
+      { text: '画一个矩形', timestamp: 2 },
+    ]
+    await nextTick()
+    await nextTick()
+    expect(mockInterpretDrawingText).toHaveBeenCalledTimes(2)
+
+    resolveSecond({
+      version: '1.0',
+      type: 'draw',
+      actions: [{ action: 'create', shape: 'rectangle', params: {} }],
+      requires_clarification: false,
+      message: null,
+    })
+    await flushPromises()
+    resolveFirst({
+      version: '1.0',
+      type: 'draw',
+      actions: [{ action: 'create', shape: 'circle', params: {} }],
+      requires_clarification: false,
+      message: null,
+    })
+    await flushPromises()
+
+    expect(wrapper.emitted('drawing')).toEqual([[
+      {
+        version: '1.0',
+        type: 'draw',
+        actions: [{ action: 'create', shape: 'rectangle', params: {} }],
+        requires_clarification: false,
+        message: null,
+      },
+    ]])
   })
 })

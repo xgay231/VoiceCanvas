@@ -8,7 +8,8 @@ const { status, results, error, start, stop } = useVoiceCapture()
 
 const resultsContainer = ref(null)
 const drawingMessage = ref(null)
-let lastInterpretedTimestamp = null
+const interpretedTimestamps = new Set()
+let latestInterpretationRequest = null
 
 function toggle() {
   if (status.value === 'idle' || status.value === 'error') {
@@ -20,15 +21,19 @@ function toggle() {
 
 async function interpretLatestResult() {
   const latest = results.value[results.value.length - 1]
-  if (!latest || latest.timestamp === lastInterpretedTimestamp) {
+  if (!latest || interpretedTimestamps.has(latest.timestamp)) {
     return
   }
 
-  lastInterpretedTimestamp = latest.timestamp
+  interpretedTimestamps.add(latest.timestamp)
+  latestInterpretationRequest = latest.timestamp
   drawingMessage.value = null
 
   try {
     const drawing = await interpretDrawingText(latest.text)
+    if (latestInterpretationRequest !== latest.timestamp) {
+      return
+    }
     if (drawing.type === 'draw') {
       emit('drawing', drawing)
       if (drawing.message) {
@@ -39,7 +44,9 @@ async function interpretLatestResult() {
 
     drawingMessage.value = drawing.message || '这句话没有生成可执行的绘图指令。'
   } catch (err) {
-    drawingMessage.value = err.message || '绘图指令解析失败。'
+    if (latestInterpretationRequest === latest.timestamp) {
+      drawingMessage.value = err.message || '绘图指令解析失败。'
+    }
   }
 }
 
