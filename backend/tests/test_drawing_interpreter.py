@@ -1,3 +1,5 @@
+import json
+
 import pytest
 
 from drawing_interpreter import parse_model_json
@@ -122,3 +124,98 @@ def test_validate_drawing_payload_rejects_create_with_unknown_shape():
     }
     with pytest.raises(ValueError, match="pyramid"):
         validate_drawing_payload(payload)
+
+
+# --- interpret_drawing_text ---
+
+from unittest.mock import MagicMock
+from drawing_interpreter import interpret_drawing_text, parse_error_payload, semantic_error_payload
+
+
+def _mock_client(message_json: str) -> MagicMock:
+    """Build a mock OpenAI client that returns the given message content."""
+    client = MagicMock()
+    response = MagicMock()
+    choice = MagicMock()
+    choice.message.content = message_json
+    response.choices = [choice]
+    client.chat.completions.create.return_value = response
+    return client
+
+
+def test_interpret_drawing_returns_parsed_draw_envelope():
+    raw_json = json.dumps({
+        "version": "1.0", "type": "draw",
+        "actions": [{"action": "create", "shape": "circle", "params": {"fill": "blue"}}],
+        "requires_clarification": False, "message": None,
+    })
+    client = _mock_client(raw_json)
+
+    result = interpret_drawing_text("画一个蓝色的圆", client)
+
+    assert result["type"] == "draw"
+    assert len(result["actions"]) == 1
+    assert result["actions"][0]["shape"] == "circle"
+
+
+def test_interpret_drawing_returns_clarification_for_incomplete():
+    raw_json = json.dumps({
+        "version": "1.0", "type": "clarification",
+        "actions": [], "requires_clarification": True,
+        "message": "请问要画什么形状？",
+    })
+    client = _mock_client(raw_json)
+
+    result = interpret_drawing_text("画一个", client)
+
+    assert result["type"] == "clarification"
+    assert result["requires_clarification"] is True
+
+
+def test_interpret_drawing_returns_noop_for_non_drawing():
+    raw_json = json.dumps({
+        "version": "1.0", "type": "no_op",
+        "actions": [], "requires_clarification": False,
+        "message": "不是绘图指令",
+    })
+    client = _mock_client(raw_json)
+
+    result = interpret_drawing_text("今天天气怎么样", client)
+
+    assert result["type"] == "no_op"
+
+
+def test_interpret_drawing_returns_parse_error_on_invalid_json():
+    client = _mock_client("这不是JSON")
+
+    result = interpret_drawing_text("随便说点什么", client)
+
+    assert result["type"] == "parse_error"
+
+
+def test_interpret_drawing_returns_parse_error_on_missing_fields():
+    raw_json = json.dumps({"version": "1.0"})
+    client = _mock_client(raw_json)
+
+    result = interpret_drawing_text("画一个", client)
+
+    assert result["type"] == "parse_error"
+
+
+def test_parse_error_payload_has_correct_shape():
+    result = parse_error_payload("解析失败")
+
+    assert result["version"] == "1.0"
+    assert result["type"] == "parse_error"
+    assert result["actions"] == []
+    assert result["requires_clarification"] is False
+    assert "解析失败" in result["message"]
+
+
+def test_semantic_error_payload_has_correct_shape():
+    result = semantic_error_payload()
+
+    assert result["version"] == "1.0"
+    assert result["type"] == "semantic_error"
+    assert result["actions"] == []
+    assert result["requires_clarification"] is False
