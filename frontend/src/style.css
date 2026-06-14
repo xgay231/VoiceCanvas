@@ -1,10 +1,12 @@
 @import "tailwindcss";
 @config "../tailwind.config.js";
 
-@layer base {
-  body {
-    background: var(--bg);
-  }
+/* Override Tailwind preflight's body background to preserve existing dark mode */
+:root {
+  background: var(--bg);
+}
+body {
+  background: inherit;
 }
 
 :root {
