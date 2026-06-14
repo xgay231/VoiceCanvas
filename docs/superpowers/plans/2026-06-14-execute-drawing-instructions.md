@@ -132,7 +132,7 @@ git commit -m "chore(openspec): mark drawing endpoint contract checked"
 - Create: `frontend/src/api/drawingInterpreter.js`
 - Create: `frontend/src/api/__tests__/drawingInterpreter.test.js`
 
-- [ ] **Step 1: Write failing API helper tests**
+- [x] **Step 1: Write failing API helper tests**
 
 Create `frontend/src/api/__tests__/drawingInterpreter.test.js`:
 
@@ -189,7 +189,7 @@ describe('interpretDrawingText', () => {
 })
 ```
 
-- [ ] **Step 2: Run API helper tests to verify failure**
+- [x] **Step 2: Run API helper tests to verify failure**
 
 Run from `frontend/`:
 
@@ -199,7 +199,7 @@ npm run test -- src/api/__tests__/drawingInterpreter.test.js
 
 Expected: FAIL with module not found for `../drawingInterpreter.js`.
 
-- [ ] **Step 3: Implement API helper**
+- [x] **Step 3: Implement API helper**
 
 Create `frontend/src/api/drawingInterpreter.js`:
 
@@ -225,7 +225,7 @@ export async function interpretDrawingText(text) {
 }
 ```
 
-- [ ] **Step 4: Run API helper tests to verify pass**
+- [x] **Step 4: Run API helper tests to verify pass**
 
 Run from `frontend/`:
 
@@ -235,7 +235,7 @@ npm run test -- src/api/__tests__/drawingInterpreter.test.js
 
 Expected: PASS.
 
-- [ ] **Step 5: Commit API helper**
+- [x] **Step 5: Commit API helper**
 
 ```bash
 git add frontend/src/api/drawingInterpreter.js frontend/src/api/__tests__/drawingInterpreter.test.js
