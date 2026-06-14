@@ -45,6 +45,16 @@ DRAWING_INTERPRETER_PROMPT = """\
 - `create` + `text`：创建文字
 - `create` + `line`：创建线条
 
+每个 action 对象结构如下（注意使用 `shape` 字段指定形状，不要用 `type`）：
+
+```json
+{
+  "action": "create",
+  "shape": "rectangle",
+  "params": { ... }
+}
+```
+
 update 动作暂不支持具体参数，遇到更新需求时返回 `unsupported`。
 
 ## params 语义预设
@@ -172,7 +182,10 @@ def validate_drawing_payload(payload: dict) -> None:
         if action_type not in SUPPORTED_ACTIONS:
             raise ValueError(f"Unknown action type at index {i}: {action_type}")
         if action_type == "create":
-            shape = action.get("shape")
+            # Normalize: accept "type" as alias for "shape" (model may return either)
+            shape = action.get("shape") or action.get("type")
+            if shape in SUPPORTED_CREATE_SHAPES and "shape" not in action:
+                action["shape"] = shape
             if shape not in SUPPORTED_CREATE_SHAPES:
                 raise ValueError(f"Unknown create shape at index {i}: {shape}")
 

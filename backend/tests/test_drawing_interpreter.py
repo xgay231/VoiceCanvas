@@ -126,7 +126,24 @@ def test_validate_drawing_payload_rejects_create_with_unknown_shape():
         validate_drawing_payload(payload)
 
 
-# --- interpret_drawing_text ---
+def test_validate_drawing_payload_normalizes_type_to_shape():
+    """模型返回 type 字段时自动归一化为 shape"""
+    payload = {
+        "version": "1.0",
+        "type": "draw",
+        "actions": [
+            {
+                "action": "create",
+                "type": "rectangle",
+                "params": {"fill": "red"},
+            }
+        ],
+        "requires_clarification": False,
+        "message": None,
+    }
+    validate_drawing_payload(payload)
+    # After validation, "shape" key should be populated
+    assert payload["actions"][0]["shape"] == "rectangle"
 
 from unittest.mock import MagicMock
 from drawing_interpreter import interpret_drawing_text, parse_error_payload, semantic_error_payload
