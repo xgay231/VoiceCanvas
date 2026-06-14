@@ -14,6 +14,8 @@ The system SHALL expose a controlled drawing execution entrypoint from the drawi
 - **THEN** the canvas SHALL add the corresponding Fabric objects
 - **AND** the newly created objects SHALL be visible on the canvas
 
+## ADDED Requirements
+
 ### Requirement: Canvas executes basic JSON drawing create actions
 
 The system SHALL map supported structured drawing `create` actions to Fabric.js objects for basic shapes.
