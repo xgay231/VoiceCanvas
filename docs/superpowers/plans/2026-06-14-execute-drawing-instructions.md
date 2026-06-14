@@ -571,7 +571,7 @@ git commit -m "chore(openspec): mark canvas execution task complete"
 - Modify: `frontend/src/components/VoiceControl.vue:1-170`
 - Create: `frontend/src/components/__tests__/VoiceControl.test.js`
 
-- [ ] **Step 1: Write failing VoiceControl tests**
+- [x] **Step 1: Write failing VoiceControl tests**
 
 Create `frontend/src/components/__tests__/VoiceControl.test.js`:
 
@@ -666,7 +666,7 @@ describe('VoiceControl drawing interpretation', () => {
 })
 ```
 
-- [ ] **Step 2: Run VoiceControl tests to verify failure**
+- [x] **Step 2: Run VoiceControl tests to verify failure**
 
 Run from `frontend/`:
 
@@ -676,7 +676,7 @@ npm run test -- src/components/__tests__/VoiceControl.test.js
 
 Expected: FAIL because `VoiceControl` does not call `interpretDrawingText` or emit `drawing`.
 
-- [ ] **Step 3: Implement VoiceControl interpretation flow**
+- [x] **Step 3: Implement VoiceControl interpretation flow**
 
 Update `frontend/src/components/VoiceControl.vue` script to import the helper, define an emit, track the last processed result, and display messages:
 
@@ -755,7 +755,7 @@ Add this style near `.error-msg`:
 }
 ```
 
-- [ ] **Step 4: Run VoiceControl tests to verify pass**
+- [x] **Step 4: Run VoiceControl tests to verify pass**
 
 Run from `frontend/`:
 
@@ -765,7 +765,7 @@ npm run test -- src/components/__tests__/VoiceControl.test.js
 
 Expected: PASS.
 
-- [ ] **Step 5: Commit VoiceControl flow**
+- [x] **Step 5: Commit VoiceControl flow**
 
 ```bash
 git add frontend/src/components/VoiceControl.vue frontend/src/components/__tests__/VoiceControl.test.js

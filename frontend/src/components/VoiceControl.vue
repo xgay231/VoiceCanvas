@@ -1,10 +1,14 @@
 <script setup>
 import { ref, watch, nextTick } from 'vue'
 import { useVoiceCapture } from '../composables/useVoiceCapture.js'
+import { interpretDrawingText } from '../api/drawingInterpreter.js'
 
+const emit = defineEmits(['drawing'])
 const { status, results, error, start, stop } = useVoiceCapture()
 
 const resultsContainer = ref(null)
+const drawingMessage = ref(null)
+let lastInterpretedTimestamp = null
 
 function toggle() {
   if (status.value === 'idle' || status.value === 'error') {
@@ -14,7 +18,31 @@ function toggle() {
   }
 }
 
-// Auto-scroll to bottom when new results arrive
+async function interpretLatestResult() {
+  const latest = results.value[results.value.length - 1]
+  if (!latest || latest.timestamp === lastInterpretedTimestamp) {
+    return
+  }
+
+  lastInterpretedTimestamp = latest.timestamp
+  drawingMessage.value = null
+
+  try {
+    const drawing = await interpretDrawingText(latest.text)
+    if (drawing.type === 'draw') {
+      emit('drawing', drawing)
+      if (drawing.message) {
+        drawingMessage.value = drawing.message
+      }
+      return
+    }
+
+    drawingMessage.value = drawing.message || '这句话没有生成可执行的绘图指令。'
+  } catch (err) {
+    drawingMessage.value = err.message || '绘图指令解析失败。'
+  }
+}
+
 watch(
   () => results.value.length,
   async () => {
@@ -22,6 +50,7 @@ watch(
     if (resultsContainer.value) {
       resultsContainer.value.scrollTop = resultsContainer.value.scrollHeight
     }
+    await interpretLatestResult()
   },
 )
 </script>
@@ -51,6 +80,7 @@ watch(
 
     <!-- Error message -->
     <p v-if="error" class="error-msg">{{ error }}</p>
+    <p v-if="drawingMessage" class="drawing-msg">{{ drawingMessage }}</p>
 
     <!-- Toggle button -->
     <button class="toggle-btn" :class="{ active: status !== 'idle' && status !== 'error' }" @click="toggle">
@@ -106,6 +136,12 @@ h1 {
 
 .error-msg {
   color: #d32f2f;
+  margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.drawing-msg {
+  color: #1d4ed8;
   margin-bottom: 1rem;
   font-size: 0.9rem;
 }
