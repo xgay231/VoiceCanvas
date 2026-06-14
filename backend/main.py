@@ -65,7 +65,9 @@ async def transcribe(audio: UploadFile):
             ],
             extra_body={"asr_options": {"language": "zh"}},
         )
-        return {"text": completion.choices[0].message.content, "success": True}
+        text = completion.choices[0].message.content
+        drawing = interpret_drawing_text(text, client)
+        return {"text": text, "success": True, "drawing": drawing}
     except Exception as e:
         return {"text": "", "success": False, "error": str(e)}
 
