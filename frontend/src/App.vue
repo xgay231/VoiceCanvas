@@ -1,7 +1,7 @@
 <script setup>
-import HelloWorld from './components/HelloWorld.vue'
+import VoiceControl from './components/VoiceControl.vue'
 </script>
 
 <template>
-  <HelloWorld />
+  <VoiceControl />
 </template>
