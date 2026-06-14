@@ -5,7 +5,7 @@ build_mode: executing-plans
 build_pause: null
 subagent_dispatch: null
 tdd_mode: tdd
-isolation: worktree
+isolation: branch
 verify_mode: null
 auto_transition: true
 base_ref: 5c70ddbf7869bf41062c61034922e5ef3f2985a5
@@ -19,3 +19,4 @@ verified_at: null
 archived: false
 handoff_context: openspec/changes/add-fabric-canvas/.comet/handoff/design-context.json
 handoff_hash: cb5a80c8eee56219ce9fdc630ab5c331fabf073dad746aeb5244a7b7e7cf305a
+build_command: cd frontend && npm run build

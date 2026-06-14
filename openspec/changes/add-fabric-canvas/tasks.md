@@ -1,8 +1,8 @@
 ## 1. Dependency and Project Setup
 
-- [ ] 1.1 Add Fabric.js dependency compatible with the required `import { fabric } from 'fabric'` usage.
-- [ ] 1.2 Add or adjust TypeScript support needed for Vue `<script setup lang="ts">` components.
-- [ ] 1.3 Add or adjust Tailwind CSS setup if it is not already available to the frontend.
+- [x] 1.1 Add Fabric.js dependency compatible with the required `import { fabric } from 'fabric'` usage.
+- [x] 1.2 Add or adjust TypeScript support needed for Vue `<script setup lang="ts">` components.
+- [x] 1.3 Add or adjust Tailwind CSS setup if it is not already available to the frontend.
 
 ## 2. Drawing Canvas Component
 
