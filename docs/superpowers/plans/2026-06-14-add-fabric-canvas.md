@@ -499,7 +499,7 @@ npm run build
 
 Expected: Vite production build 成功，确认 Fabric、TypeScript SFC、Tailwind/PostCSS 都能被打包。
 
-- [ ] **Step 3: 启动本地前端进行手动验证**
+- [x] **Step 3: 启动本地前端进行手动验证**
 
 Run:
 
@@ -510,7 +510,7 @@ npm run dev
 
 Expected: Vite dev server 启动并显示本地访问地址，通常是 `http://localhost:5173/`。
 
-- [ ] **Step 4: 在浏览器完成手动验收**
+- [x] **Step 4: 在浏览器完成手动验收**
 
 打开 Vite 页面后确认：
 
@@ -525,7 +525,7 @@ Expected: Vite dev server 启动并显示本地访问地址，通常是 `http://
 - 下载的 PNG 只包含 Fabric 画布内容，不包含按钮或外层 wrapper
 ```
 
-- [ ] **Step 5: 停止 dev server**
+- [x] **Step 5: 停止 dev server**
 
 在运行 `npm run dev` 的终端按 `Ctrl+C`。
 
