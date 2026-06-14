@@ -2,6 +2,8 @@
 comet_change: add-fabric-canvas
 role: technical-design
 canonical_spec: openspec
+archived-with: 2026-06-14-add-fabric-canvas
+status: final
 ---
 
 # Add Fabric Canvas Technical Design

@@ -2,6 +2,7 @@
 change: add-fabric-canvas
 design-doc: docs/superpowers/specs/2026-06-14-add-fabric-canvas-design.md
 base-ref: 3ef4b9efd51d373bae81c6600b13a8db9b316f35
+archived-with: 2026-06-14-add-fabric-canvas
 ---
 
 # Add Fabric Canvas Implementation Plan
@@ -14,6 +15,7 @@ base-ref: 3ef4b9efd51d373bae81c6600b13a8db9b316f35
 
 **Tech Stack:** Vue 3 Composition API、`<script setup lang="ts">`、Fabric.js v5、Vite、Vitest、Tailwind CSS。
 
+archived-with: 2026-06-14-add-fabric-canvas
 ---
 
 ## 文件结构与职责
@@ -48,6 +50,7 @@ base-ref: 3ef4b9efd51d373bae81c6600b13a8db9b316f35
 - `3.1`：Task 5 在 `App.vue` 挂载画布且保留语音 UI。
 - `3.2`：Task 6 运行测试和构建验证。
 
+archived-with: 2026-06-14-add-fabric-canvas
 ---
 
 ### Task 1: 添加 Fabric.js 依赖
@@ -92,6 +95,7 @@ git add frontend/package.json frontend/package-lock.json
 git commit -m "chore(frontend): add fabric canvas dependency"
 ```
 
+archived-with: 2026-06-14-add-fabric-canvas
 ---
 
 ### Task 2: 添加 TypeScript SFC 支持
@@ -188,6 +192,7 @@ git add frontend/package.json frontend/package-lock.json frontend/tsconfig.json 
 git commit -m "chore(frontend): add typescript sfc support"
 ```
 
+archived-with: 2026-06-14-add-fabric-canvas
 ---
 
 ### Task 3: 添加 Tailwind CSS 支持
@@ -268,6 +273,7 @@ git add frontend/package.json frontend/package-lock.json frontend/tailwind.confi
 git commit -m "chore(frontend): add tailwind styling support"
 ```
 
+archived-with: 2026-06-14-add-fabric-canvas
 ---
 
 ### Task 4: 创建 DrawingCanvas 组件
@@ -414,6 +420,7 @@ git add frontend/src/components/DrawingCanvas.vue
 git commit -m "feat(frontend): add fabric drawing canvas component"
 ```
 
+archived-with: 2026-06-14-add-fabric-canvas
 ---
 
 ### Task 5: 在 App 中挂载 DrawingCanvas
@@ -468,6 +475,7 @@ git add frontend/src/App.vue
 git commit -m "feat(frontend): mount drawing canvas in app"
 ```
 
+archived-with: 2026-06-14-add-fabric-canvas
 ---
 
 ### Task 6: 完整验证与手动检查
@@ -551,6 +559,7 @@ git add frontend/package.json frontend/package-lock.json frontend/src/components
 git commit -m "fix(frontend): stabilize fabric canvas build"
 ```
 
+archived-with: 2026-06-14-add-fabric-canvas
 ---
 
 ## 自检结果
