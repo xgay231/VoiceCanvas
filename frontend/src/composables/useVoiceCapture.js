@@ -1,5 +1,7 @@
 import { ref } from "vue";
 import { MicVAD } from "@ricky0123/vad-web";
+import ortWasmModuleUrl from "onnxruntime-web/ort-wasm-simd-threaded.mjs?url";
+import ortWasmBinaryUrl from "onnxruntime-web/ort-wasm-simd-threaded.wasm?url";
 import { encodeWav } from "../utils/wav-encoder.js";
 
 /**
@@ -90,10 +92,39 @@ export function useVoiceCapture() {
       error.value = null;
       status.value = "idle";
 
-      stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-
       vad = await MicVAD.new({
-        stream,
+        baseAssetPath: "/",
+        onnxWASMBasePath: {
+          mjs: ortWasmModuleUrl,
+          wasm: ortWasmBinaryUrl,
+        },
+        startOnLoad: false,
+        redemptionMs: 3000,
+        getStream: async () => {
+          stream = await navigator.mediaDevices.getUserMedia({
+            audio: {
+              channelCount: 1,
+              echoCancellation: true,
+              autoGainControl: true,
+              noiseSuppression: true,
+            },
+          });
+          return stream;
+        },
+        pauseStream: async (mediaStream) => {
+          mediaStream.getTracks().forEach((track) => track.stop());
+        },
+        resumeStream: async () => {
+          stream = await navigator.mediaDevices.getUserMedia({
+            audio: {
+              channelCount: 1,
+              echoCancellation: true,
+              autoGainControl: true,
+              noiseSuppression: true,
+            },
+          });
+          return stream;
+        },
         onSpeechStart: () => {
           status.value = "speaking";
         },
@@ -106,7 +137,7 @@ export function useVoiceCapture() {
         },
       });
 
-      vad.start();
+      await vad.start();
       status.value = "listening";
     } catch (err) {
       if (err.name === "NotAllowedError") {
@@ -124,7 +155,7 @@ export function useVoiceCapture() {
    */
   function stop() {
     if (vad) {
-      vad.destroy();
+      vad.destroy().catch(() => {});
       vad = null;
     }
     if (stream) {
