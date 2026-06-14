@@ -1,5 +1,5 @@
 workflow: full
-phase: build
+phase: verify
 context_compression: off
 build_mode: executing-plans
 build_pause: null
@@ -19,4 +19,4 @@ verified_at: null
 archived: false
 handoff_context: openspec/changes/add-fabric-canvas/.comet/handoff/design-context.json
 handoff_hash: cb5a80c8eee56219ce9fdc630ab5c331fabf073dad746aeb5244a7b7e7cf305a
-build_command: npm run build
+build_command: npm --prefix frontend run build
