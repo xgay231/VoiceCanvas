@@ -972,7 +972,7 @@ git commit -m "chore(openspec): mark focused drawing coverage complete"
 **Files:**
 - Modify: `openspec/changes/execute-drawing-instructions/tasks.md:1-8`
 
-- [ ] **Step 1: Run backend validation**
+- [x] **Step 1: Run backend validation**
 
 Run from `backend/`:
 
@@ -982,7 +982,7 @@ Run from `backend/`:
 
 Expected: PASS.
 
-- [ ] **Step 2: Run frontend validation**
+- [x] **Step 2: Run frontend validation**
 
 Run from `frontend/`:
 
@@ -993,7 +993,7 @@ npm run build
 
 Expected: both commands PASS.
 
-- [ ] **Step 3: Manually verify UI golden path**
+- [x] **Step 3: Manually verify UI golden path**
 
 Start backend from `backend/`:
 
@@ -1018,7 +1018,7 @@ In the browser:
 7. Produce unsupported/no-op input such as `把圆形旋转45度` or non-drawing text.
 8. Confirm a message appears and the canvas object count does not change.
 
-- [ ] **Step 4: Mark final verification task complete**
+- [x] **Step 4: Mark final verification task complete**
 
 Change this checkbox in `openspec/changes/execute-drawing-instructions/tasks.md`:
 
@@ -1032,7 +1032,7 @@ to:
 - [x] Run the relevant frontend/backend validation commands and manually verify the golden path in the browser if UI execution is implemented.
 ```
 
-- [ ] **Step 5: Commit verification status**
+- [x] **Step 5: Commit verification status**
 
 ```bash
 git add openspec/changes/execute-drawing-instructions/tasks.md
