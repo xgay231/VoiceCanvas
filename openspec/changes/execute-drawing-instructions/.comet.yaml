@@ -19,3 +19,4 @@ verified_at: null
 archived: false
 handoff_context: openspec/changes/execute-drawing-instructions/.comet/handoff/design-context.json
 handoff_hash: ef62904e5248c1840e3c0a1810c433b6095d32dbd745f6fc3bec52db2ebee0d1
+build_command: npm --prefix frontend run build

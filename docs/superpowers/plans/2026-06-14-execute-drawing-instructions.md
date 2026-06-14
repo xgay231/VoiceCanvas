@@ -110,7 +110,7 @@ git commit -m "test(backend): cover drawing interpretation endpoint contract"
 Change the first checkbox in `openspec/changes/execute-drawing-instructions/tasks.md` from:
 
 ```markdown
-- [ ] Inspect current backend standalone drawing interpretation endpoint and align its response contract with frontend execution needs.
+- [todo] Inspect current backend standalone drawing interpretation endpoint and align its response contract with frontend execution needs.
 ```
 
 to:
@@ -549,7 +549,7 @@ git commit -m "feat(frontend): execute basic drawing actions on canvas"
 Change this checkbox in `openspec/changes/execute-drawing-instructions/tasks.md`:
 
 ```markdown
-- [ ] Add a controlled DrawingCanvas execution entrypoint that maps supported `create` actions to Fabric.js rectangle, circle, text, and line objects.
+- [todo] Add a controlled DrawingCanvas execution entrypoint that maps supported `create` actions to Fabric.js rectangle, circle, text, and line objects.
 ```
 
 to:
@@ -777,7 +777,7 @@ git commit -m "feat(frontend): interpret recognized text for drawing"
 Change this checkbox in `openspec/changes/execute-drawing-instructions/tasks.md`:
 
 ```markdown
-- [ ] Add or update frontend API flow so recognized transcript text is submitted to the standalone drawing interpretation endpoint.
+- [todo] Add or update frontend API flow so recognized transcript text is submitted to the standalone drawing interpretation endpoint.
 ```
 
 to:
@@ -907,7 +907,7 @@ git commit -m "feat(frontend): wire voice drawing results to canvas"
 Change this checkbox in `openspec/changes/execute-drawing-instructions/tasks.md`:
 
 ```markdown
-- [ ] Wire voice results to drawing execution and display backend messages for non-draw/error envelopes without changing the canvas.
+- [todo] Wire voice results to drawing execution and display backend messages for non-draw/error envelopes without changing the canvas.
 ```
 
 to:
@@ -951,7 +951,7 @@ Expected: PASS.
 Change this checkbox in `openspec/changes/execute-drawing-instructions/tasks.md`:
 
 ```markdown
-- [ ] Add focused tests or verification coverage for successful basic creation, non-draw message handling, and unsupported actions not crashing the UI.
+- [todo] Add focused tests or verification coverage for successful basic creation, non-draw message handling, and unsupported actions not crashing the UI.
 ```
 
 to:
@@ -1023,7 +1023,7 @@ In the browser:
 Change this checkbox in `openspec/changes/execute-drawing-instructions/tasks.md`:
 
 ```markdown
-- [ ] Run the relevant frontend/backend validation commands and manually verify the golden path in the browser if UI execution is implemented.
+- [todo] Run the relevant frontend/backend validation commands and manually verify the golden path in the browser if UI execution is implemented.
 ```
 
 to:
@@ -1059,7 +1059,7 @@ If `build_mode` is `executing-plans`, load `requesting-code-review` before runni
 <!-- review skipped: skill unavailable -->
 ```
 
-- [ ] **Step 3: Run build guard**
+- [x] **Step 3: Run build guard**
 
 Run:
 
