@@ -16,4 +16,4 @@
 ## 3. App Integration and Verification
 
 - [x] 3.1 Mount `DrawingCanvas` in `frontend/src/App.vue` without breaking the existing voice control UI.
-- [ ] 3.2 Run frontend tests/build to verify the component, dependency imports, TypeScript, and bundling.
+- [x] 3.2 Run frontend tests/build to verify the component, dependency imports, TypeScript, and bundling.

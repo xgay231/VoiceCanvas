@@ -477,7 +477,7 @@ git commit -m "feat(frontend): mount drawing canvas in app"
 - Verify only: `frontend/src/App.vue`
 - Verify only: `frontend/package.json`
 
-- [ ] **Step 1: 运行前端测试**
+- [x] **Step 1: 运行前端测试**
 
 Run:
 
@@ -488,7 +488,7 @@ npm run test
 
 Expected: 现有 Vitest 测试通过；如果项目当前没有测试且 Vitest 以 no tests 失败，记录该现有测试覆盖状态，不为本 change 新增无关测试框架。
 
-- [ ] **Step 2: 运行前端生产构建**
+- [x] **Step 2: 运行前端生产构建**
 
 Run:
 
@@ -531,7 +531,7 @@ Expected: Vite dev server 启动并显示本地访问地址，通常是 `http://
 
 Expected: dev server 停止。
 
-- [ ] **Step 6: 查看最终变更范围**
+- [x] **Step 6: 查看最终变更范围**
 
 Run:
 
@@ -542,7 +542,7 @@ git diff --stat HEAD~5..HEAD
 
 Expected: 变更只集中在 `frontend/` 的依赖、配置、样式接入、`DrawingCanvas.vue` 和 `App.vue`。不应出现 `backend/`、VAD/ONNX 资源或音频编码文件变更。
 
-- [ ] **Step 7: 提交验证记录（如有补充修正）**
+- [x] **Step 7: 提交验证记录（如有补充修正）**
 
 如果验证过程中只运行命令且没有文件变更，不需要提交。如果为修复验证失败修改了文件，提交相关文件：
 
