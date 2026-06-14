@@ -799,7 +799,7 @@ git commit -m "chore(openspec): mark drawing interpretation flow complete"
 - Modify: `frontend/src/App.vue:1-11`
 - Create: `frontend/src/App.test.js`
 
-- [ ] **Step 1: Write failing App coordination test**
+- [x] **Step 1: Write failing App coordination test**
 
 Create `frontend/src/App.test.js`:
 
@@ -847,7 +847,7 @@ describe('App drawing coordination', () => {
 })
 ```
 
-- [ ] **Step 2: Run App test to verify failure**
+- [x] **Step 2: Run App test to verify failure**
 
 Run from `frontend/`:
 
@@ -857,7 +857,7 @@ npm run test -- src/App.test.js
 
 Expected: FAIL because `App.vue` does not hold a canvas ref or handle `drawing` events.
 
-- [ ] **Step 3: Implement App coordination**
+- [x] **Step 3: Implement App coordination**
 
 Update `frontend/src/App.vue`:
 
@@ -885,7 +885,7 @@ function handleDrawing(drawing: unknown) {
 </template>
 ```
 
-- [ ] **Step 4: Run App test to verify pass**
+- [x] **Step 4: Run App test to verify pass**
 
 Run from `frontend/`:
 
@@ -895,7 +895,7 @@ npm run test -- src/App.test.js
 
 Expected: PASS.
 
-- [ ] **Step 5: Commit App coordination**
+- [x] **Step 5: Commit App coordination**
 
 ```bash
 git add frontend/src/App.vue frontend/src/App.test.js
