@@ -248,7 +248,7 @@ git commit -m "feat(frontend): add drawing interpretation API helper"
 - Modify: `frontend/src/components/DrawingCanvas.vue:1-100`
 - Modify: `frontend/src/components/__tests__/DrawingCanvas.test.ts:1-83`
 
-- [ ] **Step 1: Extend Fabric mocks and write failing canvas execution tests**
+- [x] **Step 1: Extend Fabric mocks and write failing canvas execution tests**
 
 Replace the Fabric mock setup in `frontend/src/components/__tests__/DrawingCanvas.test.ts` with constructors that expose their `opts`:
 
@@ -352,7 +352,7 @@ Add these tests to the `describe('DrawingCanvas')` block:
   })
 ```
 
-- [ ] **Step 2: Run canvas tests to verify failure**
+- [x] **Step 2: Run canvas tests to verify failure**
 
 Run from `frontend/`:
 
@@ -362,7 +362,7 @@ npm run test -- src/components/__tests__/DrawingCanvas.test.ts
 
 Expected: FAIL because `executeDrawing` is not exposed.
 
-- [ ] **Step 3: Implement execution entrypoint in DrawingCanvas**
+- [x] **Step 3: Implement execution entrypoint in DrawingCanvas**
 
 In `frontend/src/components/DrawingCanvas.vue`, add these helpers inside `<script setup lang="ts">` before `onMounted`:
 
@@ -527,7 +527,7 @@ to:
 defineExpose({ canvas, executeDrawing })
 ```
 
-- [ ] **Step 4: Run canvas tests to verify pass**
+- [x] **Step 4: Run canvas tests to verify pass**
 
 Run from `frontend/`:
 
@@ -537,14 +537,14 @@ npm run test -- src/components/__tests__/DrawingCanvas.test.ts
 
 Expected: PASS.
 
-- [ ] **Step 5: Commit canvas execution entrypoint**
+- [x] **Step 5: Commit canvas execution entrypoint**
 
 ```bash
 git add frontend/src/components/DrawingCanvas.vue frontend/src/components/__tests__/DrawingCanvas.test.ts
 git commit -m "feat(frontend): execute basic drawing actions on canvas"
 ```
 
-- [ ] **Step 6: Mark OpenSpec canvas task complete**
+- [x] **Step 6: Mark OpenSpec canvas task complete**
 
 Change this checkbox in `openspec/changes/execute-drawing-instructions/tasks.md`:
 

@@ -44,6 +44,153 @@ function downloadCanvas() {
   document.body.removeChild(link)
 }
 
+type DrawingAction = {
+  action?: string
+  shape?: string
+  type?: string
+  params?: Record<string, unknown>
+}
+
+type DrawingEnvelope = {
+  type?: string
+  actions?: DrawingAction[]
+  message?: string | null
+}
+
+type ExecutionResult = {
+  executed: number
+  skipped: number
+  message: string | null
+}
+
+const DEFAULT_FILL = '#2563eb'
+const DEFAULT_STROKE = '#1e40af'
+
+function numberParam(params: Record<string, unknown>, key: string, fallback: number) {
+  const value = params[key]
+  return typeof value === 'number' && Number.isFinite(value) ? value : fallback
+}
+
+function stringParam(params: Record<string, unknown>, key: string, fallback: string) {
+  const value = params[key]
+  return typeof value === 'string' && value.trim() ? value : fallback
+}
+
+function makeRectangle(params: Record<string, unknown>) {
+  return new fabric.Rect({
+    width: numberParam(params, 'width', 120),
+    height: numberParam(params, 'height', 80),
+    fill: stringParam(params, 'fill', DEFAULT_FILL),
+    stroke: stringParam(params, 'stroke', DEFAULT_STROKE),
+    strokeWidth: numberParam(params, 'strokeWidth', 2),
+    originX: 'center',
+    originY: 'center',
+    left: numberParam(params, 'x', CANVAS_WIDTH / 2),
+    top: numberParam(params, 'y', CANVAS_HEIGHT / 2),
+  })
+}
+
+function makeCircle(params: Record<string, unknown>) {
+  return new fabric.Circle({
+    radius: numberParam(params, 'radius', 50),
+    fill: stringParam(params, 'fill', DEFAULT_FILL),
+    stroke: stringParam(params, 'stroke', DEFAULT_STROKE),
+    strokeWidth: numberParam(params, 'strokeWidth', 2),
+    originX: 'center',
+    originY: 'center',
+    left: numberParam(params, 'x', CANVAS_WIDTH / 2),
+    top: numberParam(params, 'y', CANVAS_HEIGHT / 2),
+  })
+}
+
+function makeText(params: Record<string, unknown>) {
+  return new fabric.Text(stringParam(params, 'text', 'Text'), {
+    fill: stringParam(params, 'fill', '#111827'),
+    fontSize: numberParam(params, 'fontSize', 32),
+    originX: 'center',
+    originY: 'center',
+    left: numberParam(params, 'x', CANVAS_WIDTH / 2),
+    top: numberParam(params, 'y', CANVAS_HEIGHT / 2),
+  })
+}
+
+function makeLine(params: Record<string, unknown>) {
+  return new fabric.Line([
+    numberParam(params, 'x1', CANVAS_WIDTH / 2 - 80),
+    numberParam(params, 'y1', CANVAS_HEIGHT / 2),
+    numberParam(params, 'x2', CANVAS_WIDTH / 2 + 80),
+    numberParam(params, 'y2', CANVAS_HEIGHT / 2),
+  ], {
+    stroke: stringParam(params, 'stroke', DEFAULT_STROKE),
+    strokeWidth: numberParam(params, 'strokeWidth', 4),
+  })
+}
+
+function createFabricObject(action: DrawingAction) {
+  if (action.action !== 'create') {
+    return null
+  }
+
+  const shape = action.shape || action.type
+  const params = action.params || {}
+
+  if (shape === 'rectangle') {
+    return makeRectangle(params)
+  }
+  if (shape === 'circle') {
+    return makeCircle(params)
+  }
+  if (shape === 'text') {
+    return makeText(params)
+  }
+  if (shape === 'line') {
+    return makeLine(params)
+  }
+
+  return null
+}
+
+function executeDrawing(drawing: DrawingEnvelope): ExecutionResult {
+  const actions = Array.isArray(drawing.actions) ? drawing.actions : []
+
+  if (drawing.type !== 'draw') {
+    return {
+      executed: 0,
+      skipped: actions.length,
+      message: drawing.message || null,
+    }
+  }
+
+  if (!canvas.value) {
+    return { executed: 0, skipped: actions.length, message: '画布尚未准备好。' }
+  }
+
+  let executed = 0
+  let skipped = 0
+
+  for (const action of actions) {
+    const object = createFabricObject(action)
+    if (!object) {
+      skipped += 1
+      continue
+    }
+
+    canvas.value.add(object)
+    canvas.value.setActiveObject(object)
+    executed += 1
+  }
+
+  if (executed > 0) {
+    canvas.value.renderAll()
+  }
+
+  return {
+    executed,
+    skipped,
+    message: skipped > 0 ? '部分绘图指令暂不支持，已跳过。' : null,
+  }
+}
+
 onMounted(() => {
   if (!canvasElement.value) {
     return
@@ -75,7 +222,7 @@ onUnmounted(() => {
   canvas.value = null
 })
 
-defineExpose({ canvas })
+defineExpose({ canvas, executeDrawing })
 </script>
 
 <template>
